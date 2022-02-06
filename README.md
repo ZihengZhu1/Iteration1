@@ -15,7 +15,7 @@ For this project we have the following java classes:
 - Elevator.java     
  This class represents the Elevator Subsystem which emulates an elevator car. It sends
  calls out to the scheduler when there is a request from the elevator and receives instructions
- from the scheduler when theres a message from the floor.
+ from the scheduler when there is a message/event from the floor.
 
 - Floor.java      
  This classs represents the Floor Subsystem which emulates a floor in a building.
