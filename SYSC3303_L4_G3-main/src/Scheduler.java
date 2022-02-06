@@ -16,7 +16,7 @@ public class Scheduler {
 
     public synchronized void handleRequest(RequestMsg msg) {
 
-        while (destiUp.size()==0 && destiDown.size()==0) {
+        while (msg.getDestination()== 0) {
             try {
                 wait(); // wait when there is no destinations to go
             } catch (InterruptedException e) {
@@ -24,7 +24,7 @@ public class Scheduler {
             }
         }
 
-        if(msg.getMovement() == 1){
+        if(msg != null){
             destiUp.add(msg.getDestination());
         }
         else if(msg.getMovement() == -1){

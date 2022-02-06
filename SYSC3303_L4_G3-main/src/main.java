@@ -11,14 +11,12 @@ public class main {
         schedThread = new Thread(new Server(scheduler),"The scheduler");
         floorThread = new Thread(new Elevator(scheduler),"The elevator");
         elevThread = new Thread(new Floor(scheduler),"The floor");
-        
+
         schedThread.start();
         floorThread.start();
         elevThread.start();
-        
     }
 }
-
 
 class Server implements Runnable{
     private Scheduler scheduler;

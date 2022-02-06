@@ -30,7 +30,7 @@ public class Elevator implements Runnable{
     @Override
     public void run() {
         while (true)
-        scheduler.getRequest();
+        scheduler.handleRequest(new RequestMsg(2,-1,3));
 
     }
 }

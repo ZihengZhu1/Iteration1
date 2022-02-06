@@ -15,7 +15,7 @@ public class Floor implements Runnable {
 	//read case/events from user
 	public void read_event(RequestMsg requestMsg){
 		this.requestMsg = requestMsg;
-        System.out.println("Get message from user, go to " + requestMsg.getDestination() + "floor.");
+        System.out.println("Get message from user, go to " + requestMsg.getDestination() + " floor.");
     }
 	
 	// send to scheduler
@@ -26,6 +26,8 @@ public class Floor implements Runnable {
 	 @Override
 	public void run(){
 		 while(true) {
+		 	requestMsg = new RequestMsg(1, 1,3);
+		 	arrivalMessage = new ArrivalMessage(3,true);
 			 read_event(requestMsg);
 			 floor_send(requestMsg);
 			 if(scheduler.arrival(requestMsg.getMovement(), arrivalMessage)) {
