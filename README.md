@@ -16,7 +16,18 @@ For this project we have the following java classes:
 - Floor.java
 - Main.java
 - Scheduler.java
+- RequestMessage
+- ArrivalMessage
 
 ## Breakdown of responibilites:
-
+Han Jiatong:
+- Elevator.java
+- UML diagram
+Zhang Boshen
+- Floor.java
+- test case
+Qiushuo Man
+- Scheduler.java
+- data_structure
 ## Set up and test instructions:
+Just run it for now
