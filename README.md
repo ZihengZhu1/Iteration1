@@ -24,8 +24,8 @@ This class
 - ArrivalMessage
 
 ### Breakdown of responibilites:
-- Han Jiatong:- Elevator.java, UML diagram
-- Zhang Boshen:- Floor.java, test case
+- Han Jiatong:- Elevator.java, UML diagram, test case
+- Zhang Boshen:- Floor.java, Scheduler.java, coding fixed
 - Qiushuo Man:- Scheduler.java, data_structure
 - Iyamu Ese:- Floor.java, UML Class diagram
 
