@@ -1,26 +1,28 @@
 import data_structure.*;
 
-public class Elevator implements Runnable{
+public class Elevator implements Runnable {
     private Scheduler scheduler;
-    private boolean workToBeDone=false;
+    private boolean workToBeDone = false;
 
-    public Elevator(Scheduler scheduler){
-        this.scheduler=scheduler;
+    public Elevator(Scheduler scheduler) {
+        this.scheduler = scheduler;
+        scheduler.addElevator(this);
     }
 
     //Receive message from scheduler
-    public void receiveMsg(RequestMsg requestMsg){
+    public void receiveMsg(RequestMsg requestMsg) {
         System.out.println("Get message from scheduler");
         System.out.println(requestMsg.getFrom());
         System.out.println(requestMsg.getMovement());
         System.out.println(requestMsg.getDestination());
-        report(new RequestMsg(2,-1,3), new ArrivalMessage(3,true));
+        report(new RequestMsg(2, -1, 3), new ArrivalMessage(3, true));
+
     }
 
     //Report to scheduler
     private void report(RequestMsg requestMsg, ArrivalMessage arrivalMessage) {
-        if(scheduler.arrival(requestMsg.getMovement(), arrivalMessage)){
-            System.out.println("Elevator has arrived floor No."+arrivalMessage.getFloor());
+        if (scheduler.arrival(requestMsg.getMovement(), arrivalMessage)) {
+            System.out.println("Elevator has arrived floor No." + arrivalMessage.getFloor());
         }
         System.out.println("Report to scheduler");
         System.out.println("Finish request");
@@ -29,8 +31,10 @@ public class Elevator implements Runnable{
 
     @Override
     public void run() {
-        while (true)
-        scheduler.handleRequest(new RequestMsg(2,-1,3));
 
+        while (true) {
+
+            scheduler.getRequest();
+        }
     }
 }
