@@ -37,7 +37,7 @@ For this project we have the following java classes:
 
 ### Breakdown of responibilites:
 - Han Jiatong:- Elevator.java, UML diagram, test case
-- Zhang Boshen:- Floor.java, Scheduler.java, coding fixed
+- Zhang Boshen:- Floor.java, Scheduler.java, coding fixed, UML sequence diagram
 - Qiushuo Man:- Scheduler.java, data_structure
 - Iyamu Ese:- README, UML Class diagram
 
