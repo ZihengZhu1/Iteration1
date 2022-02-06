@@ -38,5 +38,5 @@ For this project we have the following java classes:
 - Copy file pathname and...
 
 #### To run project:
-- Import project from git on eclipese
+- Import project from git on eclipse
 - Run...
