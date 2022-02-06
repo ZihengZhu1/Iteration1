@@ -30,4 +30,4 @@ Qiushuo Man
 - Scheduler.java
 - data_structure
 ## Set up and test instructions:
-Just run it for now
+Just run main() for now
