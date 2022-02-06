@@ -11,4 +11,8 @@ Team Members
 - Zhu Ziheng
 
 # ITERATION 1 
-For this project we have the following java classes
+For this project we have the following java classes:
+-Elevator.java
+-Floor.java
+-Main.java
+-Scheduler.java
