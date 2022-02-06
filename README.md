@@ -23,11 +23,16 @@ For this project we have the following java classes:
 Han Jiatong:
 - Elevator.java
 - UML diagram
-Zhang Boshen
+
+Zhang Boshen:
 - Floor.java
 - test case
-Qiushuo Man
+
+Qiushuo Man:
 - Scheduler.java
 - data_structure
+
+Iyamu Ese:
+- Floor.java
 ## Set up and test instructions:
 Just run main() for now
