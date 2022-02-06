@@ -12,7 +12,7 @@ Team Members
 
 # ITERATION 1 
 For this project we have the following java classes:
--Elevator.java
--Floor.java
--Main.java
--Scheduler.java
+- Elevator.java
+- Floor.java
+- Main.java
+- Scheduler.java
