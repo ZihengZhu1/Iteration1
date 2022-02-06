@@ -42,6 +42,6 @@ For this project we have the following java classes:
 - Iyamu Ese:- README, UML Class diagram
 
 ### Set up and test instructions:
-#### To run project:
+ To run project:
 - Import project from git on eclipese
 - Run main()
