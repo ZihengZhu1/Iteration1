@@ -16,3 +16,7 @@ For this project we have the following java classes:
 - Floor.java
 - Main.java
 - Scheduler.java
+
+## Breakdown of responibilites:
+
+## Set up and test instructions:
