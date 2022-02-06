@@ -22,18 +22,18 @@ For this project we have the following java classes:
  The floor Subsystem exchanges messages with the scheduler.
 
 - Main.java     
-  This class
+  This class contains the main method used to run the code.
  
 - Scheduler.java      
   This class recieives instructions form the floor and elevator class. It is used to schedule the elevator 
   cars and the order they respond to requests.
   
 - RequestMessage     
-  This class serves as a buffer between the floor, elevator and scheduler. It send the messages recived 
+  This class serves as a buffer between the floor, elevator and scheduler. It sends the messages recived 
   from the floor and elevator to the scheduler. 
   
 - ArrivalMessage     
-  This class
+  This class is responsible for outputing the arrival of an elevator
 
 ### Breakdown of responibilites:
 - Han Jiatong:- Elevator.java, UML diagram, test case
@@ -42,10 +42,6 @@ For this project we have the following java classes:
 - Iyamu Ese:- README, UML Class diagram
 
 ### Set up and test instructions:
-#### Before running project:
-- Create a file that contains input data to be read by the floor class
-- Copy file pathname and...
-
 #### To run project:
 - Import project from git on eclipese
-- Run...
+- Run main()
