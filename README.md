@@ -18,9 +18,8 @@ For this project we have the following java classes:
  from the scheduler when theres a message from the floor.
 
 - Floor.java      
- This classs represents the Floor Subsystem which emulates a floor in a building (with 
- up and down buttons to call the elevator). The floor Subsystem exchanges messages with
- the scheduler.
+ This classs represents the Floor Subsystem which emulates a floor in a building.
+ The floor Subsystem exchanges messages with the scheduler.
 
 - Main.java     
   This class
