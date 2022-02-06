@@ -1,22 +1,18 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+
 import data_structure.*;
 
 public class Scheduler {
     ArrayList<Integer> destiUp = new ArrayList<>();  // list of destinations above the elevator's current position.
     ArrayList<Integer> destiDown = new ArrayList<>(); // list of destinations below the elevator's current position.
     private Elevator elevator;
-    private ArrayList<RequestMsg> request =new ArrayList<>();
+    private LinkedList<RequestMsg> request =new LinkedList<>();
 
-    public Scheduler(){
-        elevator=new Elevator(this);
-        Thread elevThread;
-        elevThread=new Thread(elevator);
-        elevThread.start();
-    }
 
     public synchronized void handleRequest(RequestMsg msg) {
 
-        while (msg.getDestination()== 0) {
+        while (!request.isEmpty()) {
             try {
                 wait(); // wait when there is no destinations to go
             } catch (InterruptedException e) {
@@ -24,15 +20,20 @@ public class Scheduler {
             }
         }
 
-        if(msg != null){
-            destiUp.add(msg.getDestination());
-        }
-        else if(msg.getMovement() == -1){
-            destiDown.add(msg.getDestination());
-        }
-        else;
+//        if(msg != null){
+//            destiUp.add(msg.getDestination());
+//        }
+//        else if(msg.getMovement() == -1){
+//            destiDown.add(msg.getDestination());
+//        }
+//        else;
+        request.add(msg);
 
         notifyAll();
+    }
+
+    public void addElevator(Elevator elevator) {
+        this.elevator=elevator;
     }
 
     public synchronized void getRequest(){
@@ -43,7 +44,10 @@ public class Scheduler {
                 e.printStackTrace();
             }
         }
-        elevator.receiveMsg(request.get(0));
+        RequestMsg a=request.pop();
+        System.out.println(a);
+        elevator.receiveMsg(a);
+
         notifyAll();
     }
 
