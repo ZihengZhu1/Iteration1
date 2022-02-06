@@ -19,7 +19,9 @@ public class Elevator implements Runnable{
 
     //Report to scheduler
     private void report(RequestMsg requestMsg, ArrivalMessage arrivalMessage) {
-        scheduler.arrival(requestMsg.getMovement(), arrivalMessage);
+        if(scheduler.arrival(requestMsg.getMovement(), arrivalMessage)){
+            System.out.println("Elevator has arrived floor No."+arrivalMessage.getFloor());
+        }
         System.out.println("Report to scheduler");
         System.out.println("Finish request");
 
