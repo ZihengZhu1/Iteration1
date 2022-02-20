@@ -1,5 +1,15 @@
+/**
+ * This class handles the closing operation and closing state of the elevator of the elevator doors
+ * @author Jiatong Han
+ *
+ */
 public class Closing implements ElevatorState {
     Elevator elevator;
+    
+    /**
+     * Constructor for Closing class
+     * @param newElevator
+     */
     public Closing(Elevator newElevator){
         elevator=newElevator;
     }
@@ -14,7 +24,11 @@ public class Closing implements ElevatorState {
     public void closeDoor() {
 
     }
-
+    
+/**
+ * This method tells the elevator when the 
+ * time is up and has to move to next floor
+ */
     @Override
     public void timeIsUp() {
         elevator.setCurrentState(elevator.getEleMove());
