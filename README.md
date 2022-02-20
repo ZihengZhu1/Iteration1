@@ -12,9 +12,10 @@ Team Members
 ## - RequestMsg
 This class is used to express the format of massage communicated between each class. In this case, we use three numbers to represent where input from, elevator movements and destination.
 
-## - Floor.java This classs represents the Floor Subsystem which emulates a floor in a building. The floor Subsystem exchanges messages with the scheduler. The read_event method can receive the input from user, then floor_send method is used to send information to scheduler for the next step. After all system finish successfully, Floor will claim that elevator has reached there.
+## - Floor.java 
+This classs represents the Floor Subsystem which emulates a floor in a building. The floor Subsystem exchanges messages with the scheduler. The read_event method can receive the input from user, then floor_send method is used to send information to scheduler for the next step. After all system finish successfully, Floor will claim that elevator has reached there.
 
-# For the elevator systems, there are 4 different states. The default state is called idle state and whenever the elevator gets requests from scheduler, it will turn to Closing state meaning doors closed and prepare to move which is called MoveEle state. When the elevator reach the destination floor, it will become to Opening state and then change to idle to wait for the next request.
+### For the elevator systems, there are 4 different states. The default state is called idle state and whenever the elevator gets requests from scheduler, it will turn to Closing state meaning doors closed and prepare to move which is called MoveEle state. When the elevator reach the destination floor, it will become to Opening state and then change to idle to wait for the next request.
 
 ## - Elevator.java 
 This class represents the Elevator Subsystem which emulates an elevator car. It sends calls out to the scheduler when there is a request from the elevator and receives instructions from the scheduler when there is a message/event from the floor. The setCurrentState method is used to declare the current state of elevator. In this iteration, we contribute that each state will maintain 1 second and then switch to the next state, the timerStart method is built for this. In addition, receiveMsg is the method is used to get requests from scheduler and report after arrival using report method.
