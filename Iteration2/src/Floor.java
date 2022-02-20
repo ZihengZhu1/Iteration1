@@ -11,9 +11,9 @@ public class Floor implements Runnable {
     private ArrivalMessage arrivalMessage;
 
     /**
-	 * Constructor for floor
-	 * @param scheduler
-	 */
+    * Constructor for floor
+    * @param scheduler
+    */
     public Floor(Scheduler scheduler) {
         this.scheduler = scheduler;
         //this.requestMsg = requestMsg;
@@ -21,18 +21,18 @@ public class Floor implements Runnable {
     }
 
     /**
-	 * read case/events from user
-	 * @param requestMsg
-	 */
+    * read case/events from user
+    * @param requestMsg
+    */
     public void read_event(RequestMsg requestMsg){
         this.requestMsg = requestMsg;
         System.out.println("Get message from user, go to " + requestMsg.getDestination() + " floor.");
     }
 
-	/**
-	 * send request to scheduler
-	 * @param requestMsg
-	 */
+    /**
+    * send request to scheduler
+    * @param requestMsg
+    */
     private void floor_send(RequestMsg requestMsg) {
         scheduler.handleRequest(requestMsg);
         System.out.println("Report to scheduler");
