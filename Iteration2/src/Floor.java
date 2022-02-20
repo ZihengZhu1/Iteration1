@@ -33,7 +33,7 @@ public class Floor implements Runnable {
     * send request to scheduler
     * @param requestMsg
     */
-    private void floor_send(RequestMsg requestMsg) {
+    public void floor_send(RequestMsg requestMsg) {
         scheduler.handleRequest(requestMsg);
         System.out.println("Report to scheduler");
     }
