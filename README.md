@@ -15,12 +15,16 @@ This classs represents the Floor Subsystem which emulates a floor in a building.
 This class represents the Elevator Subsystem which emulates an elevator car. It sends calls out to the scheduler when there is a request from the elevator and receives instructions from the scheduler when there is a message/event from the floor. The setCurrentState method is used to declare the current state of elevator. In this iteration, we contribute that each state will maintain 1 second and then switch to the next state, the timerStart method is built for this. In addition, receiveMsg is the method is used to get requests from scheduler and report after arrival using report method.
 
 ## - idle.java
+This class make the elevator keep opening and it is the default state of the elevator.
 
 ## - Closing.java
+This class handles the closing operation and closing state of the elevator of the elevator doors.
 
 ## - MoveEle.java
+This class move the elevator and MoveEle state of the elevator.
 
 ## - Opening.java 
+This class handles the opening operation and opening state of the elevator of the elevator doors.
 
 ## - Scheduler.java
 This class receives instructions form the floor and elevator class. It is used to schedule the elevator cars and the order they respond to requests. In Scheduler, there are two lists which are used to put requests that to go up or down from floor and elevators. handleRequest method will implement this step and then addElevator should adjust the elevator systems. After arrival, method called arrival will send massage to floor so that one program routine finished.
@@ -36,11 +40,6 @@ This class contains the main method used to run the code.
 - Zhang Boshen:- Floor.java, Scheduler.java, UML sequence diagram, README
 - Iyamu Ese:- UML Class diagram, Junit test
 - Ziheng Zhu: State diagram
-
-### Set up and test instructions:
- To run project:
-- Import project from git on eclipese
-- Run main()
 
 Team Members
 - Han Jiatong
