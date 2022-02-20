@@ -3,12 +3,6 @@
 Date: Feb 19th 2022.  
 **Version 2.0**
 
-Team Members
-- Han Jiatong
-- Iyamu Ese
-- Zhang Boshen
-- Zhu Ziheng
-
 ## - RequestMsg
 This class is used to express the format of massage communicated between each class. In this case, we use three numbers to represent where input from, elevator movements and destination.
 
@@ -47,3 +41,9 @@ This class contains the main method used to run the code.
  To run project:
 - Import project from git on eclipese
 - Run main()
+
+Team Members
+- Han Jiatong
+- Iyamu Ese
+- Zhang Boshen
+- Zhu Ziheng
