@@ -16,7 +16,7 @@ public class Opening implements ElevatorState {
     @Override
     public void timeIsUp() {
         elevator.setCurrentState(elevator.getIdle());
-        System.out.println("Elevator back to idle");
+        System.out.println("Elevator back to idle state");
         elevator.timerStart();
     }
 
