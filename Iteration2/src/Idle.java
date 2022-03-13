@@ -21,9 +21,13 @@ public class Idle implements ElevatorState{
 
     @Override
     public void receiveRequest() {
+        System.out.println("Current state is idle");
+        System.out.println("Received request");
         elevator.setCurrentState(elevator.getClosing());
         System.out.println("Elevator is closing the door");
-        elevator.timerStart();
+        System.out.println("Timer started");
+        elevator.timerStart(1000);
+
     }
 
     @Override
