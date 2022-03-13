@@ -1,13 +1,15 @@
 # SYSC 3303 PROJECT
 
-Date: Feb 19th 2022.  
-**Version 2.0**
+Date: Mar 12th 2022.  
+**Version 3.0**
 
 ## - RequestMsg
 This class is used to express the format of massage communicated between each class. In this case, we use four numbers to represent where original floor from, elevator id, elevator movements and destination.
 
 ## - Floor.java 
-This classs represents the Floor Subsystem which emulates a floor in a building. The floor Subsystem exchanges messages with the scheduler. The read_event method can receive the input from user, then floor_send method is used to send information to scheduler for the next step. After all system finish successfully, Floor will claim that elevator has reached there.
+This classs represents the Floor Subsystem which emulates a floor in a building. The floor Subsystem exchanges messages with the scheduler. The readEvent method can receive the input from user, then floor_send method is used to send information to scheduler for the next step. After all system finish successfully, Floor will claim that elevator has reached there.
+
+This time the floor has Idle, Requesting and Waiting states, it will changed if the last state finished.
 
 ### For the elevator systems, there are 4 different states. The default state is called idle state and whenever the elevator gets requests from scheduler, it will turn to Closing state meaning doors closed and prepare to move which is called MoveEle state. When the elevator reach the destination floor, it will become to Opening state and then change to idle to wait for the next request.
 
@@ -29,6 +31,8 @@ This class handles the opening operation and opening state of the elevator of th
 ## - Scheduler.java
 This class receives instructions form the floor and elevator class. It is used to schedule the elevator cars and the order they respond to requests. In Scheduler, there are two lists which are used to put requests that to go up or down from floor and elevators. handleRequest method will implement this step and then addElevator should adjust the elevator systems. After arrival, method called arrival will send massage to floor so that one program routine finished.
 
+This time the scheduler has two states Waiting and Instructing, it will automatically changed if last state accomplished.
+
 ## - ArrivalMessage.java
 This class is responsible for outputing the arrival of an elevator. It returns a boolean variable to represent if elevator has arrived or not.
 
@@ -36,9 +40,9 @@ This class is responsible for outputing the arrival of an elevator. It returns a
 This class contains the main method used to run the code.
 
 ### Breakdown of responibilites:
-- Han Jiatong:- Elevator.java, UML diagram, test case
-- Zhang Boshen:- Floor.java, Scheduler.java, UML sequence diagram, README
-- Iyamu Ese:- UML Class diagram, Junit test
+- Han Jiatong:- Elevator.java, Elevator system, test case
+- Zhang Boshen:- Floor.java, Scheduler.java, Elevator.java, UML sequence diagram, README
+- Iyamu Ese:- UML Class diagram, Javadoc
 - Ziheng Zhu: State diagram
 
 Team Members
