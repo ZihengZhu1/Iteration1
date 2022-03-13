@@ -27,7 +27,6 @@ public class ReachFloor implements ElevatorState{
 
     @Override
     public void reachFloor(int floor) {
-
     }
 
 }
