@@ -33,12 +33,12 @@ public class Closing implements ElevatorState {
     public void timeIsUp() {
         elevator.setCurrentState(elevator.getEleMove());
         System.out.println("Elevator begin to move to destination");
-        elevator.timerStart();
+        elevator.timerStart(1000);//tmp hardcode,later will change to variable depend on speed. For now is 1 sec.
     }
 
     @Override
     public void receiveRequest()  {
-
+        //edge case: same floor receive request, state change to opening
     }
 
     @Override
