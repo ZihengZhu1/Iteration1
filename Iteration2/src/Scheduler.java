@@ -1,15 +1,40 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
 import data_structure.*;
 
-public class Scheduler {
+public class Scheduler implements Runnable {
     ArrayList<Integer> destiUp = new ArrayList<>();  // list of destinations above the elevator's current position.
     ArrayList<Integer> destiDown = new ArrayList<>(); // list of destinations below the elevator's current position.
     private Elevator elevator;
     private LinkedList<RequestMsg> request =new LinkedList<>();
+    private byte req[] = new byte[40];
 
+    DatagramPacket sendPacket, receivePacket, instructionPacket;
+    DatagramSocket sendReceiveSocket, receiveSocket, sendSocket;
+    DatagramSocket eSendSocket, eReceiveSocket;
+    
+    String ELEVATOR_IP_ADDRESS = "";
 
+    public Scheduler() {
+    	try {
+            //sendReceiveSocket = new DatagramSocket();
+            eSendSocket = new DatagramSocket();
+            eReceiveSocket = new DatagramSocket(69);
+            receiveSocket = new DatagramSocket(23);
+            sendSocket = new DatagramSocket();
+        } catch (SocketException se) { 
+            se.printStackTrace();
+            System.exit(1);
+        }
+    }
+    
     public synchronized void handleRequest(RequestMsg msg) {
 
         while (!request.isEmpty()) {
@@ -59,4 +84,75 @@ public class Scheduler {
         }
         return false;
     }
+    
+    public enum MachineState {
+        Waiting {
+            @Override
+            public MachineState nextState() {
+                return Instructing;
+            }
+            
+            @Override
+            public String currentState() {
+            	return "Waiting";
+            }
+        },
+        Instructing {
+            @Override
+            public MachineState nextState() {
+                return Waiting;
+            }
+            
+            @Override
+            public String currentState() {
+            	return "Instructing";
+            }
+        };
+        public abstract MachineState nextState();
+        public abstract String currentState();
+    }
+    
+    public void receiveFromFloor() {
+    	if(destiUp.isEmpty()&&destiDown.isEmpty()) {
+			byte msg[] = new byte[40];
+		}
+    	receivePacket = Floor.waitPacket(receiveSocket, "Scheduler");
+    	byte[] msg = receivePacket.getData();
+    	req = msg;
+    	System.out.println("Scheduler receved floor request");
+    	if (msg[0] > msg[3]) {
+    		destiDown.add((int) msg[3]); 
+    	}
+    	
+    	if(msg[0] < msg[3]) {
+    		destiUp.add((int) msg[3]);		
+    	}
+    	DatagramPacket reply = Floor.waitPacket(receiveSocket, "Scheduler");
+		Floor.sendPacket(reply.getData(), reply.getLength(), reply.getAddress(), 
+				receivePacket.getPort(), sendSocket);
+       
+    }
+    
+    @Override
+	public void run(){
+		MachineState state = MachineState.Waiting;
+		while (true) {
+			while (state.currentState() == "Waiting") {
+				receiveFromFloor();
+				System.out.println("elevator goes" + req[3]);
+				state = state.nextState();
+			}
+				
+			while (state.currentState() == "Instructing") {
+				DatagramPacket receivePacket = Floor.waitPacket(receiveSocket, "Scheduler");
+				
+				Floor.sendPacket(receivePacket.getData(), receivePacket.getLength(), 
+						receivePacket.getAddress(), req[1], sendSocket);
+				System.out.println("elevator" + req[1] + "should move");
+				state = state.nextState();
+			}
+		}
+	}
+    
 }
+  

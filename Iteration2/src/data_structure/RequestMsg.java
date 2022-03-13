@@ -1,19 +1,21 @@
 package data_structure;
 
 /**
- * Request message sent from Floor and Elevator
+ * Request message format sent from Floor and Elevator
  *
- * @author Qiushuo Man
+ * @author Boshen Zhang
  */
 
 
 public class RequestMsg {
-    private int from;  // 1 if from floor, 2 if from elevator
+    private int from;  // from which floor
+    private int elevatorId;
     private int movement; // -1 if moving down, 1 if moving up, 0 if stay still
     private int destination;
 
-    public RequestMsg(int from, int movement, int destination){
+    public RequestMsg(int from, int elevatorId, int movement, int destination){
         this.from = from;
+        this.elevatorId = elevatorId;
         this.movement = movement;
         this.destination = destination;
     }
@@ -21,6 +23,10 @@ public class RequestMsg {
     public void setFrom(int from) {
         this.from = from;
     }
+    
+    public void setElevatorId(int elevatorId) {
+		this.elevatorId = elevatorId;
+	}
 
     public void setMovement(int movement) {
         this.movement = movement;
@@ -30,7 +36,15 @@ public class RequestMsg {
         this.destination = destination;
     }
 
-    public int getFrom(){return from;}
+    public int getFrom(){
+    	return from;}
+    
+    public int getElevatorId() {
+		return elevatorId;
+	}
     public int getMovement(){return  movement;}
     public int getDestination() { return destination; }
+
+	
+
 }

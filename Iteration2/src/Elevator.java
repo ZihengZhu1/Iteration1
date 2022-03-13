@@ -1,6 +1,16 @@
 /**This class is a representation of an elevator
  * @author Jiatong Han
  */
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
+import data_structure.*;
 import data_structure.*;
 
 public class Elevator implements Runnable {
@@ -13,7 +23,11 @@ public class Elevator implements Runnable {
     ElevatorState reachFloor;
 
     ElevatorState currentState;
-
+    private static DatagramPacket receivePacket;
+	private static DatagramSocket sendSocket, receiveSocket;
+	private final int Id = 2;
+	private byte request[] = new byte[40];
+	
     /**
      * Constructor for Elevator class
      * @param scheduler
@@ -27,15 +41,22 @@ public class Elevator implements Runnable {
 
         currentState =idle;
 
-
         this.scheduler = scheduler;
         scheduler.addElevator(this);
     }
-    
+
+
     /**
      * Overload constructor for Elevator class
      */
     public Elevator(){
+    	try{
+			sendSocket = new DatagramSocket();
+			receiveSocket = new DatagramSocket(Id);
+		}catch (SocketException se){
+			se.printStackTrace();
+			System.exit(1);
+		}
         idle=new Idle(this);
         closing=new Closing(this);
         opening =new Opening(this);
@@ -45,6 +66,37 @@ public class Elevator implements Runnable {
         currentState =idle;
 
     }
+    
+    private void receviveFromScheduler(){
+		
+		receivePacket = Floor.waitPacket(receiveSocket, "Elevator NO 2");
+		
+		byte[] data = receivePacket.getData();
+		request = data;
+		
+		System.out.println("Elevator sending");
+		System.out.println("Elevator No 2 send user to floor" + request[3]);
+		sendPacket(data, data.length, receivePacket.getAddress(), 23, sendSocket);
+		System.out.println("Elevator has sent");
+	}
+    
+    public static void sendPacket(byte[]array, int len, InetAddress destadderss, int port, DatagramSocket socket){
+		
+		DatagramPacket packet = new DatagramPacket(array, len, destadderss, port);
+		
+		System.out.println("The Elevator is sending arrival:");
+		System.out.println("From host: " + packet.getAddress());
+		System.out.println("Destination host port: " + packet.getPort());
+		
+		try{
+			socket.send(packet);
+		} catch (IOException ie){
+			ie.printStackTrace();
+			System.exit(1);
+		}
+		
+		System.out.println("Elevator: sent to scheduler");
+	}
     
     /**
      * setCurrentState 
@@ -144,7 +196,7 @@ public class Elevator implements Runnable {
         System.out.println(requestMsg.getFrom());
         System.out.println(requestMsg.getMovement());
         System.out.println(requestMsg.getDestination());
-        report(new RequestMsg(2, -1, 3), new ArrivalMessage(3, true));
+        report(new RequestMsg(2,2, -1, 3), new ArrivalMessage(3, true));
 
     }
 
@@ -179,6 +231,9 @@ public class Elevator implements Runnable {
      */
     public static void main(String[] args) {
         Elevator elevator=new Elevator();
-        elevator.receiveRequest();
+        while(true) {
+        	elevator.receviveFromScheduler();
+        }
+        //elevator.receiveRequest();
     }
 }
