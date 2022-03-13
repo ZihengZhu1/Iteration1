@@ -14,11 +14,20 @@ public class MoveEle implements ElevatorState {
 
     }
 
+
+
     @Override
     public void timeIsUp() {
-        elevator.setCurrentState(elevator.getOpening());
-        System.out.println("Elevator is opening the door");
-        elevator.timerStart();
+        if (elevator.getCurrentDirection()==Elevator.STILL){
+            System.out.println("ERROR");
+        }
+        if(elevator.getCurrentDirection()==Elevator.UP){
+            elevator.increaseHeight();
+        }
+        if(elevator.getCurrentDirection()==Elevator.DOWN){
+            elevator.decreaseHeight();
+        }
+
     }
 
     @Override
@@ -28,6 +37,6 @@ public class MoveEle implements ElevatorState {
 
     @Override
     public void reachFloor(int floor) {
-
+       elevator.isDestination();
     }
 }
