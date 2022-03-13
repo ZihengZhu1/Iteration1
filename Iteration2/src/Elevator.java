@@ -53,7 +53,11 @@ public class Elevator implements Runnable {
         currentState =idle;
         this.id=id;
     }
-
+    
+     /**
+     * Constructor for Elevator class
+     * @param scheduler
+     */
     public Elevator(Scheduler scheduler) {
         idle=new Idle(this);
         closing=new Closing(this);
@@ -253,11 +257,19 @@ public class Elevator implements Runnable {
     public ElevatorState getIdle() {
         return idle;
     }
-
+    
+     /**
+     * getTimer returns timer
+     * @return timer
+     */
     public Timer getTimer() {
         return timer;
     }
-
+    
+     /**
+     * getCurrentDirection returns the current direction of the elevator
+     * @return currentDirection
+     */
     public int getCurrentDirection() {
         return currentDirection;
     }
@@ -307,7 +319,11 @@ public class Elevator implements Runnable {
             timerStart(200);
         }
     }
-
+    
+     /**
+     * getCurrentHeight returns the current height that the elevator is approching
+     * @return currentHeight
+     */
     public int getCurrentHeight() {
         return currentHeight;
     }
@@ -319,7 +335,9 @@ public class Elevator implements Runnable {
         return currentHeight/10;
     }
 
-
+     /**
+     * checks if the elevator has arrived the destination
+     */
     public void isDestination(){
         System.out.println("Current direction is ");
         System.out.println(getCurrentDirection());
