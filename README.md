@@ -4,7 +4,7 @@ Date: Feb 19th 2022.
 **Version 2.0**
 
 ## - RequestMsg
-This class is used to express the format of massage communicated between each class. In this case, we use three numbers to represent where input from, elevator movements and destination.
+This class is used to express the format of massage communicated between each class. In this case, we use four numbers to represent where original floor from, elevator id, elevator movements and destination.
 
 ## - Floor.java 
 This classs represents the Floor Subsystem which emulates a floor in a building. The floor Subsystem exchanges messages with the scheduler. The read_event method can receive the input from user, then floor_send method is used to send information to scheduler for the next step. After all system finish successfully, Floor will claim that elevator has reached there.
