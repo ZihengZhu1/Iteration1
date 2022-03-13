@@ -1,6 +1,7 @@
 /**
- * @author : boshen zhang
- * @version 2.0
+ * @author : Boshen Zhang
+ * @version 3.0
+ * Class Floor represents a floor in a building
  */
 import java.io.*;
 import java.net.*;
@@ -28,6 +29,10 @@ public class Floor implements Runnable {
         //this.arrivalMessage = arrivalMessage;
     }
     
+    /**
+     * Overloaded constructor for floor
+     */
+    
     public Floor(){
 		
 		try {
@@ -38,9 +43,13 @@ public class Floor implements Runnable {
 			System.exit(1);
 		}
 	}
-
-
-    public static byte[] read_event(RequestMsg requestMsg){
+    
+    /**
+     * readEvent receives request from scheduler
+     * @param requestMsg
+     * @return
+     */
+    public static byte[] readEvent(RequestMsg requestMsg){
         System.out.println("Get message from user, go to " + requestMsg.getDestination() + " floor.");
         byte data[] = new byte[40];
         data[0] = (byte)requestMsg.getFrom();
@@ -51,14 +60,19 @@ public class Floor implements Runnable {
     }
 
     /**
-    * send request to scheduler
+    * floorSend sends requests from the floor to scheduler
     * @param requestMsg
     */
-    public void floor_send(RequestMsg requestMsg) {
+    public void floorSend(RequestMsg requestMsg) {
         scheduler.handleRequest(requestMsg);   	
         System.out.println("Report to scheduler");
     }
     
+    /**
+     * sendAndReceive sends and receives messages from scheduler via UDP
+     * @param data
+     * @param port
+     */
     public void sendAndReceive(byte[] data, int port){		
 		try {
 			sendPacket(data, data.length, InetAddress.getLocalHost(), 23, sendReceiveSocket);
@@ -68,6 +82,15 @@ public class Floor implements Runnable {
 			System.exit(1);
 		}
 	}
+    
+    /**
+     * sendPacket sends messages to scheduler via UDP
+     * @param array
+     * @param len
+     * @param destadderss
+     * @param port
+     * @param socket
+     */
     public static void sendPacket(byte[]array, int len, InetAddress destadderss, int port, DatagramSocket socket){
 		
 		DatagramPacket packet = new DatagramPacket(array, len, destadderss, port);
@@ -84,6 +107,12 @@ public class Floor implements Runnable {
 		System.out.println("floor report to scheduler");
 	}
     
+    /**
+     * waitPacket 
+     * @param s
+     * @param source
+     * @return
+     */
     public static DatagramPacket waitPacket(DatagramSocket s, String source){
 		
 		byte data[] = new byte[40];
@@ -106,6 +135,9 @@ public class Floor implements Runnable {
 		return receivedPacket;
 	}
     
+    /**
+     *FloorState handles the states of the elevator 
+     */
     public enum FloorState {
         Idle {
             @Override
@@ -158,7 +190,7 @@ public class Floor implements Runnable {
     		}
     		
     		while (state.currentState() == "Requesting") {
-    			byte[] msg = read_event(requestMsg);
+    			byte[] msg = readEvent(requestMsg);
     			sendAndReceive(msg , 23);
     			state = state.nextState();
     		}
