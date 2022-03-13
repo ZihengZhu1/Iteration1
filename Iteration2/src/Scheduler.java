@@ -1,3 +1,10 @@
+/**
+ * @author  Boshen Zhang
+ * @version 3.0
+ * 
+ * Class Scheduler emulates/handles the scheduling of 
+ */
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.net.DatagramPacket;
@@ -21,7 +28,10 @@ public class Scheduler implements Runnable {
     DatagramSocket eSendSocket, eReceiveSocket;
     
     String ELEVATOR_IP_ADDRESS = "";
-
+    
+    /**
+     * COnstructor for class Scheduler
+     */
     public Scheduler() {
     	try {
             //sendReceiveSocket = new DatagramSocket();
@@ -35,6 +45,7 @@ public class Scheduler implements Runnable {
         }
     }
     
+    //Not used for iteration 3
     public synchronized void handleRequest(RequestMsg msg) {
 
         while (!request.isEmpty()) {
@@ -56,12 +67,20 @@ public class Scheduler implements Runnable {
 
         notifyAll();
     }
-
+    
+    /**
+     * addElevator adds elevator to requests
+     * @param elevator
+     */
     public void addElevator(Elevator elevator) {
         this.elevator=elevator;
     }
-
-    public synchronized void getRequest(){
+    
+    /**
+     * getRequest gets request from the floors and elevators
+     */
+    
+    public synchronized void getRequest(){ //not used in iteration 3
         while(request.isEmpty()){
             try{
                 wait();
@@ -75,7 +94,10 @@ public class Scheduler implements Runnable {
 
         notifyAll();
     }
-
+    
+    /**
+     * arrival
+     */
     public synchronized boolean arrival(int upOrDown,ArrivalMessage arrMsg){
         if(arrMsg.isArrived()){
             if(upOrDown==-1){destiDown.remove(arrMsg.getFloor());}
@@ -85,6 +107,9 @@ public class Scheduler implements Runnable {
         return false;
     }
     
+    /**
+     *MachineState handles the states of the scheduler
+     */
     public enum MachineState {
         Waiting {
             @Override
@@ -112,6 +137,9 @@ public class Scheduler implements Runnable {
         public abstract String currentState();
     }
     
+    /**
+     * receiveFromFloor receives request from floor
+     */
     public void receiveFromFloor() {
     	if(destiUp.isEmpty()&&destiDown.isEmpty()) {
 			byte msg[] = new byte[40];

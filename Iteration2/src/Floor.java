@@ -108,7 +108,7 @@ public class Floor implements Runnable {
 	}
     
     /**
-     * waitPacket 
+     * waitPacket handles the waiting FloorState
      * @param s
      * @param source
      * @return
